@@ -8,4 +8,6 @@ body {
 
 .scatterplot-graph {
 	background-color: lightgrey;
+	display: block;
+	margin: auto;
 }
