@@ -7,7 +7,7 @@ d3.json(dataUrl, function(json) {
 	var height = 600;
 	var width = 600;
 
-	d3.select(".scatterplot-title").text("Scatterplot of Doping in Professional Cycling");
+	d3.select(".scatterplot-title").text("Scatterplot of Doping Allegations in Professional Cycling");
 
 	var div = d3.select(".scatterplot-title")
 		.append("div")
@@ -36,7 +36,7 @@ d3.json(dataUrl, function(json) {
 	svg.append("text")
 		.style("text-anchor", "middle")
 		.attr("transform", "translate(400," + 425 +")")
-		.text("Time (in Seconds)");
+		.text("Time on Alpe d'Huez Course(in Seconds)");
 
 	// Y Axis
 	var yScale = d3.scaleLinear()
@@ -92,4 +92,46 @@ d3.json(dataUrl, function(json) {
 					.duration(200)
 					.style("opacity", 0);
 			});
+
+	// Legend for Non-Doping
+	svg.append("circle")
+		.attr("cx", function(d) {
+			return xScale(2425);
+		})
+		.attr("cy", function(d) {
+			return yScale(1);
+		})
+		.attr("r", 5)
+		.attr("fill", "#0ff");
+
+	svg.append("text")
+		.attr("x", function(d) {
+			return xScale(2425) + 10;
+		})
+		.attr("y", function(d) {
+			return yScale(1) + 5;
+		})
+		.attr("text-anchor", "left")
+		.text("No Doping History");
+
+	// Legend for Doping
+	svg.append("circle")
+		.attr("cx", function(d) {
+			return xScale(2425);
+		})
+		.attr("cy", function(d) {
+			return yScale(3);
+		})
+		.attr("r", 5)
+		.attr("fill", "#ff0000");
+
+	svg.append("text")
+		.attr("x", function(d) {
+			return xScale(2425) + 10;
+		})
+		.attr("y", function(d) {
+			return yScale(3) + 5;
+		})
+		.attr("text-anchor", "left")
+		.text("Alleged Doping History");
 });
