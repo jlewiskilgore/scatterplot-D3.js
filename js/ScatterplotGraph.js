@@ -9,6 +9,12 @@ d3.json(dataUrl, function(json) {
 
 	d3.select(".scatterplot-title").text("Scatterplot of Doping in Professional Cycling");
 
+	var div = d3.select(".scatterplot-title")
+		.append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+
+
 	var svg = d3.select(".scatterplot-graph")
 		.attr("width", width)
 		.attr("height", height)
@@ -55,11 +61,35 @@ d3.json(dataUrl, function(json) {
 		.data(dataSet)
 		.enter()
 		.append("circle")
-		.attr("cx", function(d) {
-			return xScale(d.Seconds) + 200;
-		})
-		.attr("cy", function(d) {
-			return yScale(d.Place);
-		})
-		.attr("r", 5);
+			.attr("cx", function(d) {
+				return xScale(d.Seconds) + 200;
+			})
+			.attr("cy", function(d) {
+				return yScale(d.Place);
+			})
+			.attr("r", 5)
+			.attr("fill", function(d) {
+				if(d.Doping == "") {
+					return "#0ff";
+				}
+				else {
+					return "#ff0000";
+				}
+			})
+			.on("mouseover", function(d) {
+				div.transition()
+					.duration(200)
+					.style("opacity", 1);
+				div.html(d.Name + " (" + d.Nationality + ")" + "<br/>"
+					+ "All-Time Ranking: " + d.Place + "<br/>"
+					+ "Time: " + d.Time + "<br/><br/>"
+					+ d.Doping + "<br/>")
+					.style("left", (d3.event.pageX) + "px")
+					.style("top", (d3.event.pageY) + "px");
+			})
+			.on("mouseout", function(d) {
+				div.transition()
+					.duration(200)
+					.style("opacity", 0);
+			});
 });

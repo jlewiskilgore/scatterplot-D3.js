@@ -4,10 +4,21 @@ body {
 
 .scatterplot-title {
 	text-align: center;
+	margin-bottom: 25px;
 }
 
 .scatterplot-graph {
 	background-color: lightgrey;
 	display: block;
 	margin: auto;
+}
+
+div .tooltip {
+	position: absolute;
+	text-align: center;
+	width: auto;
+	height: auto;
+	background: lightblue;
+	border: 0px;
+	pointer-events: none;
 }
