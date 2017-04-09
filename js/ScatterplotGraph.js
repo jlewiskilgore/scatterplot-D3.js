@@ -18,7 +18,7 @@ d3.json(dataUrl, function(json) {
 	var svg = d3.select(".scatterplot-graph")
 		.attr("width", width)
 		.attr("height", height)
-		.attr("viewBox", "100 -25 550 550");
+		.attr("viewBox", "100 -70 550 550");
 
 	// X Axis
 	var xScale = d3.scaleLinear()
